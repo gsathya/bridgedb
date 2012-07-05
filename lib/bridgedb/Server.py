@@ -237,15 +237,17 @@ class WebResource(twisted.web.resource.Resource):
                    + email_domain_list \
                    + "<hr /><p><a href='?ipv6=true'>" \
                    + t.gettext(I18n.BRIDGEDB_TEXT[20]) + "</a></p>" \
-                   + "<p><a href='?transport=obfs2'>" \
-                   + t.gettext(I18n.BRIDGEDB_TEXT[21]) + "</a></p>" \
-                   + "<form method='GET'>" \
-                   + "<p>" + t.gettext(I18n.BRIDGEDB_TEXT[22]) + "</p>" \
-                   + "<input name='transport'>" \
-                   + "<input type='submit' value='" \
-                   + t.gettext(I18n.BRIDGEDB_TEXT[23]) +"'>" \
-                   + "</form>" \
                    + "</body></html>"
+                   # disabled until obfsproxy bridges ready to rock'n'roll
+                   #+ "<p><a href='?transport=obfs2'>" \
+                   #+ t.gettext(I18n.BRIDGEDB_TEXT[21]) + "</a></p>" \
+                   #+ "<form method='GET'>" \
+                   #+ "<p>" + t.gettext(I18n.BRIDGEDB_TEXT[22]) + "</p>" \
+                   #+ "<input name='transport'>" \
+                   #+ "<input type='submit' value='" \
+                   #+ t.gettext(I18n.BRIDGEDB_TEXT[23]) +"'>" \
+                   #+ "</form>" \
+                   #+ "</body></html>"
         return html_msg
 
     def buildHTMLMessageTemplateWithCaptcha(self, t, challenge, img):
@@ -291,15 +293,17 @@ class WebResource(twisted.web.resource.Resource):
                    + "<p>" + t.gettext(I18n.BRIDGEDB_TEXT[4]) + "</p>" \
                    + email_domain_list \
                    + "<hr /><p><a href='?ipv6=true'>" \
-                   + t.gettext(I18n.BRIDGEDB_TEXT[20]) + "</a></p>" \
-                   + "<p><a href='?transport=obfs2'>" \
-                   + t.gettext(I18n.BRIDGEDB_TEXT[21]) + "</a></p>" \
-                   + "<form method='GET'>" \
-                   + "<p>" + t.gettext(I18n.BRIDGEDB_TEXT[22]) + "</p>" \
-                   + "<input name='transport'>" \
-                   + "<input name='submit' type='submit'>" \
-                   + "</form>" \
                    + "</body></html>"
+                   # disabled until obfsproxy bridges ready to rock'n'roll
+                   #+ t.gettext(I18n.BRIDGEDB_TEXT[20]) + "</a></p>" \
+                   #+ "<p><a href='?transport=obfs2'>" \
+                   #+ t.gettext(I18n.BRIDGEDB_TEXT[21]) + "</a></p>" \
+                   #+ "<form method='GET'>" \
+                   #+ "<p>" + t.gettext(I18n.BRIDGEDB_TEXT[22]) + "</p>" \
+                   #+ "<input name='transport'>" \
+                   #+ "<input name='submit' type='submit'>" \
+                   #+ "</form>" \
+                   #+ "</body></html>"
         return html_msg 
 
 def addWebServer(cfg, dist, sched):
@@ -536,9 +540,11 @@ def buildMessageTemplate(t):
                     + t.gettext(I18n.BRIDGEDB_TEXT[17])+ "\n\n"
                     # list supported commands, e.g. ipv6, transport
     msg_template = msg_template \
-                    + "  " + t.gettext(I18n.BRIDGEDB_TEXT[18])+ "\n" \
-                    + "  " + t.gettext(I18n.BRIDGEDB_TEXT[19])+ "\n\n" \
+                    + "  " + t.gettext(I18n.BRIDGEDB_TEXT[18])+ "\n\n" \
                     + t.gettext(I18n.BRIDGEDB_TEXT[6]) + "\n\n"
+                    # disabled until obfsproxy bridges ready to rock'n'roll
+                    #+ "  " + t.gettext(I18n.BRIDGEDB_TEXT[19])+ "\n\n" \
+                    #+ t.gettext(I18n.BRIDGEDB_TEXT[6]) + "\n\n"
     return msg_template
 
 def buildSpamWarningTemplate(t):
