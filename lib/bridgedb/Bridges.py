@@ -315,14 +315,41 @@ def parseDescFile(f, bridge_purpose='bridge'):
                 orport = int(items[3])
         elif line.startswith("fingerprint "):
             fingerprint = line[12:].replace(" ", "")
+
+        # parse or-address lines here until reachability testing is
+        # merged in Tor v0.2.4.x and "a" lines are written to the network
+        # status
+        elif line.startswith("or-address "):
+            if num_or_address_lines < 8:
+                line = line[11:]
+                try:
+                    address,portlist = parseORAddressLine(line)
+                except ParseORAddressError: 
+                    logging.warn("Invalid or-address line "\
+                            "from bridge with ID %r" %fingerprint)
+                    continue
+                try:
+                    # distinct ports only
+                    portlist.add(or_addresses[address])
+                except KeyError:
+                    pass
+                finally:
+                    or_addresses[address] = portlist
+            else:
+                logging.warn("Skipping extra or-address line "\
+                             "from Bridge with ID %r" % id)
+            num_or_address_lines += 1
+
         elif line.startswith("router-signature"):
             purposeMatches = (purpose == bridge_purpose or
                               bridge_purpose is None)
             if purposeMatches and nickname and ip and orport and fingerprint:
-                b = Bridge(nickname, ipaddr.IPAddress(ip), orport, fingerprint)
+                b = Bridge(nickname, ipaddr.IPAddress(ip), orport, fingerprint, or_addresses=or_addresses)
                 b.assertOK()
                 yield b
             nickname = ip = orport = fingerprint = purpose = None 
+            num_or_address_lines = 0
+            or_addresses = {}
 
 class PortList:
     """ container class for port ranges
@@ -516,18 +543,19 @@ def parseStatusFile(f):
             except binascii.Error:
                 logging.warn("Unparseable base64 ID %r", line.split()[2])
 
-        elif ID and line.startswith("a "):
-            if num_or_address_lines < 8:
-                line = line[2:]
-                address,portlist = parseORAddressLine(line)
-                try:
-                    or_addresses[address].add(portlist)
-                except KeyError:
-                    or_addresses[address] = portlist
-            else:
-                logging.warn("Skipping extra or-address line "\
-                             "from Bridge with ID %r" % id)
-            num_or_address_lines += 1
+        # disabled until supported by the bridge-authority
+        #elif ID and line.startswith("a "):
+        #    if num_or_address_lines < 8:
+        #        line = line[2:]
+        #        address,portlist = parseORAddressLine(line)
+        #        try:
+        #            or_addresses[address].add(portlist)
+        #        except KeyError:
+        #            or_addresses[address] = portlist
+        #    else:
+        #        logging.warn("Skipping extra or-address line "\
+        #                     "from Bridge with ID %r" % id)
+        #    num_or_address_lines += 1
 
         elif ID and line.startswith("s "):
             flags = line.split()

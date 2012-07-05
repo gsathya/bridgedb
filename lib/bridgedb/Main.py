@@ -182,7 +182,8 @@ def load(cfg, splitter, clear=False):
             if s is not None:
                 running, stable = s
                 bridge.setStatus(running=running, stable=stable)
-            bridge.or_addresses = addresses.get(bridge.getID())
+            # disabled until enabled in Tor v0.2.4.x
+            #bridge.or_addresses = addresses.get(bridge.getID())
             splitter.insert(bridge)
         f.close()
     # read pluggable transports from extra-info document
