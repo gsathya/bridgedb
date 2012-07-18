@@ -235,9 +235,15 @@ class WebResource(twisted.web.resource.Resource):
                    + "<p>" + t.gettext(I18n.BRIDGEDB_TEXT[3]) + "</p>" \
                    + "<p>" + t.gettext(I18n.BRIDGEDB_TEXT[4]) + "</p>" \
                    + email_domain_list \
-                   + "<hr /><p><a href='?ipv6=true'>" \
-                   + t.gettext(I18n.BRIDGEDB_TEXT[20]) + "</a></p>" \
+                   + "<hr /><p>Note for experts: if you can use IPv6, try" \
+                   + " upgrading to Tor 0.2.3.12 or newer and use these bridge" \
+                   + " lines:<br /><pre><tt>  bridge [2001:948:7:2::163]:6001</tt>" \
+                   + "<br /><tt>  bridge [2600:3c01::f03c:91ff:fe93:d525]:9001</tt>" \
+                   + "<br /><tt>  bridge [2600:3c01::f03c:91ff:fe93:b8ee]:443</tt><br />" \
+                   + "<br />Let us know how it goes!</p>" \
                    + "</body></html>"
+                   #+ "<hr /><p><a href='?ipv6=true'>" \
+                   #+ t.gettext(I18n.BRIDGEDB_TEXT[20]) + "</a></p>" \
                    # disabled until obfsproxy bridges ready to rock'n'roll
                    #+ "<p><a href='?transport=obfs2'>" \
                    #+ t.gettext(I18n.BRIDGEDB_TEXT[21]) + "</a></p>" \
@@ -292,9 +298,9 @@ class WebResource(twisted.web.resource.Resource):
                    + "<p>" + recaptchaTemplate + "</p>" \
                    + "<p>" + t.gettext(I18n.BRIDGEDB_TEXT[4]) + "</p>" \
                    + email_domain_list \
-                   + "<hr /><p><a href='?ipv6=true'>" \
-                   + t.gettext(I18n.BRIDGEDB_TEXT[20]) + "</a></p>" \
                    + "</body></html>"
+                   #+ "<hr /><p><a href='?ipv6=true'>" \
+                   #+ t.gettext(I18n.BRIDGEDB_TEXT[20]) + "</a></p>" \
                    # disabled until obfsproxy bridges ready to rock'n'roll
                    #+ "<p><a href='?transport=obfs2'>" \
                    #+ t.gettext(I18n.BRIDGEDB_TEXT[21]) + "</a></p>" \
