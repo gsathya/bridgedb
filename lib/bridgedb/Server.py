@@ -238,7 +238,6 @@ class WebResource(twisted.web.resource.Resource):
                    + "<hr /><p>Note for experts: if you can use IPv6, try" \
                    + " upgrading to Tor 0.2.3.12 or newer and use these bridge" \
                    + " lines:<br /><pre><tt>  bridge [2001:948:7:2::163]:6001</tt>" \
-                   + "<br /><tt>  bridge [2600:3c01::f03c:91ff:fe93:d525]:9001</tt>" \
                    + "<br /><tt>  bridge [2600:3c01::f03c:91ff:fe93:b8ee]:443</tt><br />" \
                    + "<br />Let us know how it goes!</p>" \
                    + "</body></html>"
